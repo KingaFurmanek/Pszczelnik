@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driverClassName: 'org.postgresql.Driver'
+    url: jdbc:postgresql://localhost:5433/db
+    username: postgres
+    password: postgres
+  jpa:
+    showSql: 'true'
+    hibernate:
+      ddl-auto: 'create'
+    properties:
+      hibernate:
+        dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+application:
+  security:
+    jwt:
+      secret-key: d6c1e01905407d58251743cde7c56908bdd0c81ee9a907836d5f4d7fdd3fc654
+      expiration: 86400000
+
+  file:
+    upload:
+      photos: ./uploads
+
+app:
+  url: http://localhost:5173
