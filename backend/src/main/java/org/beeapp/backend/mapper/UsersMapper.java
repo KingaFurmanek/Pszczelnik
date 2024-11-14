@@ -15,6 +15,7 @@ public class UsersMapper {
                 .setSurname(user.getSurname())
                 .setEmail(user.getEmail())
                 .setRole(user.getUserRole())
-                .setImage(FileUtils.readFileFromLocation(user.getUserDetails().getImage()));
+                .setImage(FileUtils.readFileFromLocation(user.getUserDetails().getImage()))
+                .setBlocked(user.isBlocked());
     }
 }

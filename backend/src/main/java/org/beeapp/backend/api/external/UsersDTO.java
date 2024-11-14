@@ -15,4 +15,5 @@ public class UsersDTO {
     private String email;
     private String role;
     private byte[] image;
+    private boolean isBlocked;
 }

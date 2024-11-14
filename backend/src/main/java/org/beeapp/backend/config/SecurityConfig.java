@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -30,31 +32,15 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/login",
                                 "/api/auth/register"
-                        )
-                        .permitAll()
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/api/users/**",
-                                "/api/hive/**",
-                                "/api/forum/**"
                         ).permitAll()
                         .requestMatchers(
-                                HttpMethod.POST,
+                                "/api/user/**",
                                 "/api/hive/**",
                                 "/api/forum/**"
-                        ).permitAll()
-                        .requestMatchers(
-                                HttpMethod.PUT,
-                                "/api/hive/**",
-                                "/api/forum/**"
-                        ).permitAll()
-                        .requestMatchers(
-                                HttpMethod.DELETE,
-                                "/api/hive/**",
-                                "/api/forum/**"
-                        ).permitAll()
-                        .anyRequest()
-                        .authenticated())
+                        ).authenticated()
+                        .requestMatchers("/api/admin/**").hasAuthority("admin")
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -62,4 +48,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }

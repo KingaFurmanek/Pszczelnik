@@ -39,13 +39,17 @@ public class Users implements UserDetails {
     @Column(name = "is_blocked")
     private boolean isBlocked = false;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Hive> hives;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
-    @JsonManagedReference
     private UserProfile userDetails;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<LikeDislike> likeDislikes;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

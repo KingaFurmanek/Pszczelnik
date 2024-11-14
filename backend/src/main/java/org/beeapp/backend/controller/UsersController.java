@@ -29,6 +29,14 @@ public class UsersController {
         }
     }
 
+    @GetMapping("/status")
+    public ResponseEntity<Boolean> getUserStatus(Authentication authentication) {
+        Users currentUser = (Users) authentication.getPrincipal();
+        String userEmail = currentUser.getEmail();
+        Boolean isBlocked = usersService.getUserStatus(userEmail);
+        return ResponseEntity.ok(isBlocked);
+    }
+
     @PostMapping("/photo")
     public ResponseEntity<String> uploadPhoto(Authentication authentication, @RequestParam("file") MultipartFile file) {
         Users currentUser = (Users) authentication.getPrincipal();

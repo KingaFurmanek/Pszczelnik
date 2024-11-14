@@ -25,7 +25,6 @@ public class UserProfile{
     @OneToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    @JsonBackReference
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users user;
 
