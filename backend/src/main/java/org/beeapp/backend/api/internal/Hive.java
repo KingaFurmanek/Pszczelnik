@@ -36,19 +36,19 @@ public class Hive {
     @Column(name = "image")
     private String image;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Inspection> inspections;
 
-    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task> tasks;
 
-    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Health> healthInspections;
 
-    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hive", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Feeding> feedings;
 }
